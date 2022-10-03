@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 @Mixin(MinecraftServer.class)
 public class ResetMixin {
@@ -30,7 +32,7 @@ public class ResetMixin {
         return false;
     }
 
-    @Redirect(method = "shutdown", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;hasNext()Z", ordinal = 1))
+    @Redirect(method = "shutdown", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;hasNext()Z", ordinal = 2))
     private boolean getWorldsInjectTwo(Iterator<ServerWorld> iterator){
         if(Client.saveOnQuit){
             return iterator.hasNext();
@@ -63,6 +65,14 @@ public class ResetMixin {
         if(Client.saveOnQuit){
             playerManager.saveAllPlayerData();
         }
+    }
+
+    @Redirect(method = "shutdown", at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;anyMatch(Ljava/util/function/Predicate;)Z"))
+    private boolean streamWorldsInject(Stream stream, Predicate predicate) {
+        if(Client.saveOnQuit){
+            return stream.anyMatch(predicate);
+        }
+        return false;
     }
 
     // kill all things auto save things

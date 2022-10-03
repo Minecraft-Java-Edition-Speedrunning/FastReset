@@ -20,7 +20,7 @@ public abstract class ClientMixin {
     public abstract void setScreen(Screen screen);
 
     @Inject(method = "createWorld", at=@At("HEAD"))
-    public void worldWait(String worldName, LevelInfo levelInfo, DynamicRegistryManager.Impl registryTracker, GeneratorOptions generatorOptions, CallbackInfo ci){
+    public void worldWait(String worldName, LevelInfo levelInfo, DynamicRegistryManager dynamicRegistryManager, GeneratorOptions generatorOptions, CallbackInfo ci){
         this.setScreen(new SaveWorldScreen());
         synchronized(Client.saveLock){
             System.out.println("done waiting for save lock");
