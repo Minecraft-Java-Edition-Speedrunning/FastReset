@@ -18,7 +18,7 @@ public abstract class ClientMixin {
 
     @Shadow public abstract void openScreen(Screen screen);
 
-    @Inject(method = "method_29607", at=@At("HEAD"))
+    @Inject(method = "createWorld", at=@At("HEAD"))
     public void worldWait(String worldName, LevelInfo levelInfo, RegistryTracker.Modifiable registryTracker, GeneratorOptions generatorOptions, CallbackInfo ci){
         this.openScreen(new SaveWorldScreen());
         synchronized(Client.saveLock){
