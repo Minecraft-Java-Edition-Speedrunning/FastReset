@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "id": "fast_reset",
-  "version": "1.4.1",
-  "name": "FastReset_1.16.1",
-  "description": "",
+  "version": "${version}",
+  "name": "FastReset",
+  "description": "Skips saving worlds to reset faster.",
   "authors": [
     "closet_witch"
   ],
