@@ -48,11 +48,6 @@ public class ResetMixin {
                         }
                     }
                 }
-                try {
-                    this.session.deleteSessionLock();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }).start();
         return false;
