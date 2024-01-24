@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.*;
 
 @Mixin(MinecraftServer.class)
 public class ResetMixin {
@@ -43,8 +43,7 @@ public class ResetMixin {
                     if (world != null) {
                         try {
                             world.close();
-                        } catch (IOException ignored) {
-
+                        } catch (ConcurrentModificationException | IOException ignored) {
                         }
                     }
                 }
