@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "fast_reset",
   "version": "${version}",
-  "name": "FastReset_1.16.1",
-  "description": "",
+  "name": "FastReset",
+  "description": "Skips saving worlds to reset faster.",
   "authors": [
     "closet_witch"
   ],
@@ -12,7 +12,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "fast_reset.client.FastReset"
+      "fast_reset.client.client.Client"
+    ],
+    "main": [
+      "fast_reset.client.Client"
     ]
   },
   "mixins": [
@@ -20,6 +23,6 @@
   ],
   "depends": {
     "fabricloader": ">=0.1.0",
-    "minecraft": ">=1.16 <=1.16.1"
+    "minecraft": "1.16.1"
   }
 }

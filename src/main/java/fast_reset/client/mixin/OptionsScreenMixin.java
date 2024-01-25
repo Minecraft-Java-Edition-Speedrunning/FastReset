@@ -1,7 +1,8 @@
 package fast_reset.client.mixin;
 
-import fast_reset.client.FastReset;
+import fast_reset.client.Client;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.screen.options.OptionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.LiteralText;
@@ -18,26 +19,22 @@ public class OptionsScreenMixin extends Screen {
         super(title);
     }
 
-    private static Text getButtonText() {
-        String text;
-        switch (FastReset.buttonLocation) {
+    private static Text getButtonText(){
+        switch(Client.buttonLocation){
             case 0:
-                text = "bottom right";
-                break;
+                return new LiteralText("bottom right");
             case 1:
-                text = "center";
-                break;
+                return new LiteralText("center");
             case 2:
             default:
-                text = "replace s&q";
+                return new LiteralText("replace s&q");
         }
-        return new LiteralText(text);
     }
 
     @Inject(method = "init", at=@At("TAIL"))
-    public void initInject(CallbackInfo ci) {
+    public void initInject(CallbackInfo ci){
         this.addButton(new ButtonWidget(this.width / 2 - 155, this.height / 6 + 142 - 4, 150, 20, getButtonText(), (buttonWidget) -> {
-            FastReset.updateButtonLocation();
+            Client.updateButtonLocation();
             buttonWidget.setMessage(getButtonText());
         }));
     }
