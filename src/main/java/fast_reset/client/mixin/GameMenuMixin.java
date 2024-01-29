@@ -1,6 +1,7 @@
 package fast_reset.client.mixin;
 
 import fast_reset.client.Client;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.screen.*;
 import net.minecraft.client.gui.widget.*;
 import net.minecraft.text.Text;
@@ -19,18 +20,17 @@ public abstract class GameMenuMixin extends Screen {
     @Unique
     private static final int bottomRightWidth = 102;
 
-    @Redirect(method = "initWidgets", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/GridWidget$Adder;add(Lnet/minecraft/client/gui/widget/ClickableWidget;I)Lnet/minecraft/client/gui/widget/ClickableWidget;"))
-    private <T extends ClickableWidget> T addButtons(GridWidget.Adder instance, T widget, int occupiedColumns) {
-        @SuppressWarnings("NoTranslation") final ButtonWidget.Builder saveButton = ButtonWidget.builder(Text.translatable("menu.quitWorld"), (buttonWidgetX) -> {
+    @Redirect(method = "initWidgets", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/GridWidget$Adder;add(Lnet/minecraft/client/gui/widget/Widget;I)Lnet/minecraft/client/gui/widget/Widget;"))
+    private <T extends Widget> T addButtons(GridWidget.Adder instance, T widget, int occupiedColumns) {
+        final ButtonWidget.Builder saveButton = ButtonWidget.builder(Text.translatable("menu.quitWorld"), (buttonWidgetX) -> {
             Client.saveOnQuit = false;
             this.disconnect();
             Client.saveOnQuit = true;
         });
-
         if (Client.buttonLocation == 2) {
             // add menu.quitWorld button instead of save button
             instance.add(saveButton.width(204).build(), occupiedColumns);
-            return this.addDrawableChild(widget);
+            return (T) this.addDrawableChild((ButtonWidget) widget);
         }
 
         int height = 20;

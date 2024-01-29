@@ -63,7 +63,7 @@ public class ResetMixin {
     }
 
     @Redirect(method = "shutdown", at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;anyMatch(Ljava/util/function/Predicate;)Z"))
-    private boolean streamWorldsInject(Stream stream, Predicate predicate) {
+    private boolean streamWorldsInject(Stream<ServerWorld> stream, Predicate<? super ServerWorld> predicate) {
         if(Client.saveOnQuit){
             return stream.anyMatch(predicate);
         }

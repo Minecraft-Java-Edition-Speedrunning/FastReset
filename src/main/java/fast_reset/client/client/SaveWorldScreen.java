@@ -16,6 +16,6 @@ public class SaveWorldScreen extends Screen {
 
         super.render(matrices, mouseX, mouseY, delta);
 
-        drawCenteredText(matrices, this.textRenderer, "still saving the last world", this.width / 2, 70, Color.white.getRGB());
+        drawCenteredTextWithShadow(matrices, this.textRenderer, "still saving the last world", this.width / 2, 70, Color.white.getRGB());
     }
 }

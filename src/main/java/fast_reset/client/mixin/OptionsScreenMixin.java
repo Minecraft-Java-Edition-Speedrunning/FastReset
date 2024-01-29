@@ -29,7 +29,7 @@ public class OptionsScreenMixin extends Screen {
         }
     }
 
-    @Inject(method = "init", at= @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/GridWidget$Adder;add(Lnet/minecraft/client/gui/widget/ClickableWidget;ILnet/minecraft/client/gui/widget/Positioner;)Lnet/minecraft/client/gui/widget/ClickableWidget;"), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "init", at= @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/GridWidget$Adder;add(Lnet/minecraft/client/gui/widget/Widget;ILnet/minecraft/client/gui/widget/Positioner;)Lnet/minecraft/client/gui/widget/Widget;"), locals = LocalCapture.CAPTURE_FAILHARD)
     public void initInject(CallbackInfo ci, GridWidget gridWidget, GridWidget.Adder adder){
         adder.add(ButtonWidget.builder(getButtonText(), (buttonWidget) -> {
             Client.updateButtonLocation();
