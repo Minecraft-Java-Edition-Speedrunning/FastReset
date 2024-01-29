@@ -3,7 +3,7 @@
   "id": "fast_reset",
   "version": "${version}",
   "name": "FastReset",
-  "description": "",
+  "description": "Skips saving worlds to reset faster.",
   "authors": [
     "closet_witch"
   ],
