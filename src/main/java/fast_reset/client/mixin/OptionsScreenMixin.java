@@ -31,9 +31,9 @@ public class OptionsScreenMixin extends Screen {
 
     @Inject(method = "init", at=@At("TAIL"))
     public void initInject(CallbackInfo ci){
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 155, this.height / 6 + 142 - 4, 150, 20, getButtonText(), (buttonWidget) -> {
+        this.addDrawableChild(ButtonWidget.builder(getButtonText(), (buttonWidget) -> {
             Client.updateButtonLocation();
             buttonWidget.setMessage(getButtonText());
-        }));
+        }).dimensions(this.width / 2 - 155, this.height / 6 + 142 - 4, 150, 20).build());
     }
 }

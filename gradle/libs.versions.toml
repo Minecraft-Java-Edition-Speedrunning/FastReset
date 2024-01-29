@@ -1,6 +1,6 @@
 [versions]
-minecraft = "1.19.2"
-yarn_mappings = "1.19.2+build.28"
+minecraft = "1.19.3"
+yarn_mappings = "1.19.3+build.5"
 fabric_loader = "0.15.6"
 loom = "1.5-SNAPSHOT"
 vineflower = "1.10.0-SNAPSHOT"
