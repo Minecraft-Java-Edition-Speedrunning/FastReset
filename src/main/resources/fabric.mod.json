@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "id": "fast_reset",
-  "version": "1.0.0",
-  "name": "FastReset_1.18.2",
+  "version": "${version}",
+  "name": "FastReset",
   "description": "",
   "authors": [
     "closet_witch"
