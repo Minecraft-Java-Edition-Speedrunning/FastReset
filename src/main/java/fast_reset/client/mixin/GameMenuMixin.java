@@ -21,7 +21,7 @@ public abstract class GameMenuMixin extends Screen {
 
     @Redirect(method = "initWidgets", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/GridWidget$Adder;add(Lnet/minecraft/client/gui/widget/ClickableWidget;I)Lnet/minecraft/client/gui/widget/ClickableWidget;"))
     private <T extends ClickableWidget> T addButtons(GridWidget.Adder instance, T widget, int occupiedColumns) {
-        final ButtonWidget.Builder saveButton = ButtonWidget.builder(Text.translatable("menu.quitWorld"), (buttonWidgetX) -> {
+        @SuppressWarnings("NoTranslation") final ButtonWidget.Builder saveButton = ButtonWidget.builder(Text.translatable("menu.quitWorld"), (buttonWidgetX) -> {
             Client.saveOnQuit = false;
             this.disconnect();
             Client.saveOnQuit = true;
@@ -34,9 +34,9 @@ public abstract class GameMenuMixin extends Screen {
         }
 
         int height = 20;
-        int width;
-        int x;
-        int y;
+        int width = 0;
+        int x = 0;
+        int y = 0;
         switch (Client.buttonLocation) {
             // bottom right build
             case 0 -> {
@@ -45,7 +45,7 @@ public abstract class GameMenuMixin extends Screen {
                 y = this.height - height - 4;
             }
             // center build
-            case 1, default -> {
+            case 1 -> {
                 width = 204;
                 x = this.width / 2 - width / 2;
                 y = this.height / 4 + 148 - height;
