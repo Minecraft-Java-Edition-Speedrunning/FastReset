@@ -10,9 +10,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameMenuScreen.class)
@@ -25,7 +23,7 @@ public class GameMenuMixin extends Screen {
     private static final int bottomRightWidth = 102;
 
     // kill save on the shutdown
-    @Redirect(method = "initWidgets", at = @At(value = "NEW", target = "(IIIILnet/minecraft/text/Text;Lnet/minecraft/client/gui/widget/ButtonWidget$PressAction;)Lnet/minecraft/client/gui/widget/ButtonWidget;", ordinal=7))
+    @Redirect(method = "initWidgets", at = @At(value = "NEW", target = "(IIIILnet/minecraft/text/Text;Lnet/minecraft/client/gui/widget/ButtonWidget$PressAction;)Lnet/minecraft/client/gui/widget/ButtonWidget;"), slice = @Slice(from = @At(value = "CONSTANT:FIRST", args = "stringValue=menu.returnToMenu")))
     private ButtonWidget createExitButton(int defaultX, int defaultY, int defaultWidth, int height, Text message, ButtonWidget.PressAction onPress){
         int x = Client.buttonLocation == 2 ? (int) (this.width - (bottomRightWidth * 1.5) - 4) : defaultX;
         int y = Client.buttonLocation == 2 ? this.height - 24 : defaultY;
