@@ -47,12 +47,6 @@ public class ResetMixin {
                         }
                     }
                 }
-                // TODO: check to see if we need session lock things for 1.15.2
-//                try {
-//                    this.session.deleteSessionLock();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
             }
         }).start();
         return false;
@@ -64,13 +58,4 @@ public class ResetMixin {
             playerManager.saveAllPlayerData();
         }
     }
-
-    // kill all things auto save things
-//    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;save(ZZZ)Z"))
-//    private boolean autoSaveInject(MinecraftServer server, boolean a, boolean b, boolean c){
-//        return false;
-//    }
-//
-//    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/PlayerManager;saveAllPlayerData()V"))
-//    private void shutdownPlayerDataSaveInject(PlayerManager server){}
 }

@@ -13,7 +13,7 @@ public class SaveWorldScreen extends Screen {
     public void render(int mouseX, int mouseY, float delta) {
         this.renderBackground();
 
-        this.drawCenteredString(this.font, new LiteralText("still saving the last world").asString(), this.width / 2, 70, Color.white.getRGB());
+        this.drawCenteredString(this.textRenderer, new LiteralText("still saving the last world").asString(), this.width / 2, 70, Color.white.getRGB());
 
         super.render(mouseX, mouseY, delta);
     }
