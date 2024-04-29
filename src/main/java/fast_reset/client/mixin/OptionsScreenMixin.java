@@ -1,14 +1,14 @@
 package fast_reset.client.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import fast_reset.client.Client;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.widget.*;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(OptionsScreen.class)
 public class OptionsScreenMixin extends Screen {
@@ -29,8 +29,8 @@ public class OptionsScreenMixin extends Screen {
         }
     }
 
-    @Inject(method = "init", at= @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/GridWidget$Adder;add(Lnet/minecraft/client/gui/widget/Widget;ILnet/minecraft/client/gui/widget/Positioner;)Lnet/minecraft/client/gui/widget/Widget;"), locals = LocalCapture.CAPTURE_FAILHARD)
-    public void initInject(CallbackInfo ci, GridWidget gridWidget, GridWidget.Adder adder){
+    @Inject(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/GridWidget$Adder;add(Lnet/minecraft/client/gui/widget/Widget;)Lnet/minecraft/client/gui/widget/Widget;", shift = At.Shift.AFTER), slice = @Slice(from = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/screen/option/OptionsScreen;CREDITS_AND_ATTRIBUTION_TEXT:Lnet/minecraft/text/Text;")))
+    public void initInject(CallbackInfo ci, @Local GridWidget.Adder adder){
         adder.add(ButtonWidget.builder(getButtonText(), (buttonWidget) -> {
             Client.updateButtonLocation();
             buttonWidget.setMessage(getButtonText());
